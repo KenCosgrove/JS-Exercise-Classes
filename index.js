@@ -98,11 +98,7 @@ class Car {
     }
   }
 }
-const betty = new Car("kia", 20);
-console.log(betty.fill(10));
-console.log(betty);
-console.log(betty.drive(250));
-console.log(betty);
+
 /*
   TASK 3
     - Write a Lambdasian class.
@@ -155,8 +151,24 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+  randomGrade(student) {
+    let points = Math.floor(Math.random() * 5);
+    let random = Math.random();
+    if (random < 0.5) {
+      return (student.grade += points);
+    } else {
+      return (student.grade -= points);
+    }
+  }
 }
-
+const teacher = new Instructor({
+  name: "Kyle",
+  age: 30,
+  location: "Texas",
+  specialty: "OOP",
+  favLanguage: "JS",
+  catchPhrase: "make sure you get those forms in",
+});
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -179,6 +191,7 @@ class Student extends Lambdasian {
     this.previousBackground = attrs.previousBackground;
     this.className = attrs.className;
     this.favSubjects = attrs.favSubjects;
+    this.grade = 80;
   }
   listSubjects() {
     return `Loving ${this.favSubjects}`;
@@ -189,7 +202,23 @@ class Student extends Lambdasian {
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
   }
+  canGraduate() {
+    if (this.grade >= 70) {
+      return `${this.name} can graduate!`;
+    } else {
+      return `${this.name} is not eligible to graduate.`;
+    }
+  }
 }
+
+const aj = new Student({
+  name: "AJ",
+  age: 21,
+  location: "Miami",
+  previousBackground: "none",
+  className: "web34",
+  favSubjects: "math and science",
+});
 
 /*
   TASK 6
@@ -217,15 +246,31 @@ class ProjectManager extends Instructor {
     return `${this.name} debugs ${student.name}'s code on ${subject}`;
   }
 }
+const PM = new ProjectManager({
+  name: "Ed",
+  age: 29,
+  gradClassName: "node",
+  favInstructor: "Kyle",
+});
+
+console.log(teacher.randomGrade(aj));
+console.log(PM.randomGrade(aj));
+console.log(aj);
+console.log(aj.canGraduate());
 
 /*
   STRETCH PROBLEM (no tests!)
-    - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
-    - Now that our students have a grade build out a method on the Instructor (this will be used by _BOTH_ instructors and PM's)
-     that will randomly add or subtract points to a student's grade. _Math.random_ will help.
+    - Extend the functionality of the Student by 
+    adding a prop called grade and setting it equal to a number between 1-100
+    - Now that our students have a grade build out a
+     method on the Instructor (this will be used by _BOTH_ instructors and PM's)
+     that will randomly add or subtract points
+      to a student's grade. _Math.random_ will help.
     - Add a graduate method to a student.
-      + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
-      + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
+      + This method, when called, will check the grade of
+       the student and see if they're ready to graduate from Lambda School
+      + If the student's grade is above a 70% let them graduate! 
+      Otherwise go back to grading their assignments to increase their score.
 */
 
 ///////// END OF CHALLENGE /////////
